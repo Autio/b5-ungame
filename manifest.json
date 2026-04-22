@@ -1,0 +1,19 @@
+{
+    "name": "The Babylon Project - A Conversation Game",
+    "short_name": "Babylon Project",
+    "description": "A Babylon 5 themed conversation game inspired by The Ungame",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0E0B16",
+    "theme_color": "#4717F6",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' fill='%230E0B16'/><circle cx='96' cy='96' r='70' fill='none' stroke='%234717F6' stroke-width='4'/><circle cx='96' cy='96' r='50' fill='none' stroke='%23A239CA' stroke-width='3'/><circle cx='96' cy='96' r='30' fill='%23A239CA' opacity='0.3'/></svg>",
+            "sizes": "192x192",
+            "type": "image/svg+xml"
+        }
+    ],
+    "categories": ["games", "entertainment"],
+    "lang": "en-US"
+}

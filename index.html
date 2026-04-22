@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Babylon Project - A Conversation Game</title>
+    <meta name="description" content="A Babylon 5 themed conversation game inspired by The Ungame. Deep questions, meaningful connections.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%230E0B16' stroke='%234717F6' stroke-width='3'/><circle cx='50' cy='50' r='30' fill='none' stroke='%23A239CA' stroke-width='2'/></svg>">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4717F6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body>
+    <!-- Starfield background -->
+    <div class="starfield" id="starfield"></div>
+
+    <!-- Main container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-ring"></div>
+                <div class="logo-inner"></div>
+            </div>
+            <h1 class="title">The Babylon Project</h1>
+            <p class="subtitle">A Conversation Game</p>
+        </header>
+
+        <!-- Welcome Screen -->
+        <section id="welcome-screen" class="screen active">
+            <div class="welcome-content">
+                <blockquote class="opening-quote">
+                    "The Babylon Project was our last, best hope for peace...
+                    a place where humans and aliens could work out their differences peacefully."
+                </blockquote>
+
+                <div class="intro-text">
+                    <p>Welcome, Ambassador. This is not a game of competition, but of <strong>connection</strong>.</p>
+                    <p>Draw cards. Share stories. Listen deeply. There are no winners or losers—only understanding.</p>
+                </div>
+
+                <div class="player-setup">
+                    <h2>Who Gathers at the Council?</h2>
+                    <div class="player-input-area">
+                        <div class="player-list" id="player-list">
+                            <!-- Players will be added here -->
+                        </div>
+                        <div class="add-player-form">
+                            <input type="text" id="player-name-input" placeholder="Enter ambassador name..." maxlength="20">
+                            <button id="add-player-btn" class="btn btn-secondary">
+                                <span class="btn-icon">+</span> Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="start-game-btn" class="btn btn-primary btn-large" disabled>
+                    <span class="btn-glow"></span>
+                    Open the Jump Gate
+                </button>
+
+                <p class="min-players-note">Minimum 2 ambassadors required</p>
+            </div>
+        </section>
+
+        <!-- Game Screen -->
+        <section id="game-screen" class="screen">
+            <!-- Current Player Display -->
+            <div class="current-player-area">
+                <div class="player-indicator">
+                    <span class="label">Now Speaking:</span>
+                    <span class="player-name" id="current-player-name">Ambassador</span>
+                </div>
+                <div class="round-counter">
+                    <span class="label">Cycle:</span>
+                    <span id="round-number">1</span>
+                </div>
+            </div>
+
+            <!-- Card Area -->
+            <div class="card-area">
+                <!-- Card Deck (face down) -->
+                <div class="card-deck" id="card-deck">
+                    <div class="deck-stack">
+                        <div class="deck-card"></div>
+                        <div class="deck-card"></div>
+                        <div class="deck-card"></div>
+                    </div>
+                    <span class="deck-label">Draw a Card</span>
+                </div>
+
+                <!-- Active Card (when drawn) -->
+                <div class="active-card" id="active-card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-category" id="card-category">Category</div>
+                            <div class="card-content" id="card-content">
+                                Your question will appear here...
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-icon" id="card-icon"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category Selector -->
+            <div class="category-selector">
+                <h3>Choose Your Sector</h3>
+                <div class="category-buttons">
+                    <button class="category-btn active" data-category="all">
+                        <span class="cat-icon">&#9733;</span>
+                        <span class="cat-name">Random</span>
+                    </button>
+                    <button class="category-btn" data-category="green">
+                        <span class="cat-icon cat-green">&#9679;</span>
+                        <span class="cat-name">Green Sector</span>
+                        <span class="cat-desc">Light & Fun</span>
+                    </button>
+                    <button class="category-btn" data-category="blue">
+                        <span class="cat-icon cat-blue">&#9679;</span>
+                        <span class="cat-name">Blue Sector</span>
+                        <span class="cat-desc">Reflective</span>
+                    </button>
+                    <button class="category-btn" data-category="grey">
+                        <span class="cat-icon cat-grey">&#9679;</span>
+                        <span class="cat-name">Grey Council</span>
+                        <span class="cat-desc">Deep</span>
+                    </button>
+                    <button class="category-btn" data-category="vorlon">
+                        <span class="cat-icon cat-vorlon">&#9679;</span>
+                        <span class="cat-name">Vorlon</span>
+                        <span class="cat-desc">Philosophical</span>
+                    </button>
+                    <button class="category-btn" data-category="shadows">
+                        <span class="cat-icon cat-shadows">&#9679;</span>
+                        <span class="cat-name">Shadows</span>
+                        <span class="cat-desc">Challenging</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Game Controls -->
+            <div class="game-controls">
+                <button id="pass-btn" class="btn btn-secondary" disabled>
+                    <span class="btn-icon">&#8594;</span> Pass to Next Ambassador
+                </button>
+                <button id="skip-btn" class="btn btn-tertiary" disabled>
+                    Skip Question
+                </button>
+            </div>
+
+            <!-- Player Queue -->
+            <div class="player-queue">
+                <h4>Council Members</h4>
+                <div class="queue-list" id="queue-list">
+                    <!-- Players shown here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- End Screen -->
+        <section id="end-screen" class="screen">
+            <div class="end-content">
+                <h2>The Council Adjourns</h2>
+                <blockquote class="closing-quote">
+                    "The Universe speaks in many languages, but only one voice...
+                    It speaks in the language of hope."
+                </blockquote>
+
+                <div class="session-stats">
+                    <div class="stat">
+                        <span class="stat-value" id="total-questions">0</span>
+                        <span class="stat-label">Questions Shared</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" id="total-rounds">0</span>
+                        <span class="stat-label">Cycles Completed</span>
+                    </div>
+                </div>
+
+                <div class="end-buttons">
+                    <button id="play-again-btn" class="btn btn-primary">
+                        Reconvene the Council
+                    </button>
+                    <button id="new-players-btn" class="btn btn-secondary">
+                        New Ambassadors
+                    </button>
+                </div>
+
+                <p class="parting-words">"We are all the sum of our tears. Too little and the ground is not fertile, and nothing can grow there. Too much, and the best of us is washed away."</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Inspired by Babylon 5 &bull; Created by J. Michael Straczynski</p>
+            <p class="disclaimer">This is a fan-made tribute. Not affiliated with Warner Bros.</p>
+            <button id="end-session-btn" class="btn-link">End Session</button>
+        </footer>
+    </div>
+
+    <!-- Audio elements (optional ambient sounds) -->
+    <audio id="card-draw-sound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRl9vT19teleQQAAAEAAAABAAEARFuAAAQFsAAAgAZGF0YU" type="audio/wav">
+    </audio>
+
+    <script src="js/questions.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
